@@ -3,7 +3,7 @@ package io.github.emircakmakgil.productservice.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import io.github.emircakmakgil.productservice.enums.Status;
+import io.github.emircakmakgil.productservice.model.enums.Status;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;

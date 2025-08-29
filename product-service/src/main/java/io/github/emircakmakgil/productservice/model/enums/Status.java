@@ -1,4 +1,4 @@
-package io.github.emircakmakgil.productservice.enums;
+package io.github.emircakmakgil.productservice.model.enums;
 
 public enum Status {
     ACTIVE,
