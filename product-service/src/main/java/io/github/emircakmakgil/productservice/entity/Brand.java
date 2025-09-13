@@ -1,11 +1,11 @@
 package io.github.emircakmakgil.productservice.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import io.github.emircakmakgil.productservice.model.enums.Status;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.net.ProtocolFamily;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -14,6 +14,9 @@ import java.util.UUID;
 @Table(name = "brands")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Brand {
     @Id
     @UuidGenerator
@@ -49,5 +52,6 @@ public class Brand {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private Status status;
+
 
 }
