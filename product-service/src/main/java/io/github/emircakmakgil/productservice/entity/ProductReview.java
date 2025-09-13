@@ -36,11 +36,7 @@ public class ProductReview {
     @Column(name = "is_verified_purchase")
     private Boolean isVerifiedPurchase = false;
     
-    @Column(name = "is_helpful_count")
-    private Integer helpfulCount = 0;
-    
-    @Column(name = "is_not_helpful_count")
-    private Integer notHelpfulCount = 0;
+
     
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;

@@ -39,7 +39,7 @@ public class Inventory {
     private String reason;
     
     @Column(name = "reference_id")
-    private UUID referenceId; // Order ID, Return ID, etc.
+    private UUID referenceId;
     
     @Column(name = "reference_type")
     private String referenceType; // ORDER, RETURN, MANUAL_ADJUSTMENT
