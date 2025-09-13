@@ -8,34 +8,25 @@ import java.util.UUID;
 @Getter
 @Setter
 public class ProductAttirbuteListiningDto {
-    private String productName;
     private String attributeName;
     private String attributeValue;
-    private String attributeType;
     private String unit;
-    private Integer sortOrder;
     private Boolean isSearchable;
     private Boolean isFilterable;
-    private Boolean isVisible;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    // Constructors
     public ProductAttirbuteListiningDto() {}
 
-    public ProductAttirbuteListiningDto(String productName, String attributeName, String attributeValue,
-                                      String attributeType, String unit, Integer sortOrder, Boolean isSearchable, Boolean isFilterable,
-                                      Boolean isVisible, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public ProductAttirbuteListiningDto(String attributeName, String attributeValue,
+                                       String unit,Boolean isSearchable, Boolean isFilterable,
+                                       LocalDateTime createdAt, LocalDateTime updatedAt) {
 
-        this.productName = productName;
         this.attributeName = attributeName;
         this.attributeValue = attributeValue;
-        this.attributeType = attributeType;
         this.unit = unit;
-        this.sortOrder = sortOrder;
         this.isSearchable = isSearchable;
         this.isFilterable = isFilterable;
-        this.isVisible = isVisible;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }

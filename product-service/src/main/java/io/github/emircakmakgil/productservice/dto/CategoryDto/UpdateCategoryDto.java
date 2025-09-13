@@ -1,5 +1,6 @@
 package io.github.emircakmakgil.productservice.dto.CategoryDto;
 
+import io.github.emircakmakgil.productservice.model.enums.Status;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,9 +13,7 @@ public class UpdateCategoryDto {
     private String name;
     private String description;
     private String imageUrl;
-    private UUID parentCategoryId;
-    private Integer sortOrder;
-    private String status;
+    private Status status;
 
 
 }

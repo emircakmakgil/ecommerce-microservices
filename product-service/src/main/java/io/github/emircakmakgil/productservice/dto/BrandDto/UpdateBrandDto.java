@@ -1,5 +1,6 @@
 package io.github.emircakmakgil.productservice.dto.BrandDto;
 
+import io.github.emircakmakgil.productservice.model.enums.Status;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,6 @@ public class UpdateBrandDto {
     private String websiteUrl;
     private String countryOfOrigin;
     private Integer foundedYear;
-    private String status;
+    private Status status;
 
 }

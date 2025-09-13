@@ -11,7 +11,5 @@ public class CreateCategoryDto {
     private String name;
     private String description;
     private String imageUrl;
-    private UUID parentCategoryId;
-    private Integer sortOrder;
     private String status;
 }

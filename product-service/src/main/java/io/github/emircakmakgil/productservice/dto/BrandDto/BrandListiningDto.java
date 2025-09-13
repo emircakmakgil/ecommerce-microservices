@@ -1,5 +1,6 @@
 package io.github.emircakmakgil.productservice.dto.BrandDto;
 
+import io.github.emircakmakgil.productservice.model.enums.Status;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,16 +16,15 @@ public class BrandListiningDto {
     private String websiteUrl;
     private String countryOfOrigin;
     private Integer foundedYear;
-    private String status;
+    private Status status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private Integer productCount;
 
     public BrandListiningDto() {}
 
     public BrandListiningDto(String name, String description, String logoUrl, String websiteUrl,
-                           String countryOfOrigin, Integer foundedYear, String status, LocalDateTime createdAt,
-                           LocalDateTime updatedAt, Integer productCount) {
+                             String countryOfOrigin, Integer foundedYear, Status status, LocalDateTime createdAt,
+                             LocalDateTime updatedAt) {
         this.name = name;
         this.description = description;
         this.logoUrl = logoUrl;
@@ -34,7 +34,6 @@ public class BrandListiningDto {
         this.status = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.productCount = productCount;
     }
 
 }

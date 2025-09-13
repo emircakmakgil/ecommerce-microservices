@@ -1,8 +1,8 @@
 package io.github.emircakmakgil.productservice.entity;
 
+import io.github.emircakmakgil.productservice.model.enums.ProductType;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import io.github.emircakmakgil.productservice.model.enums.Status;
 import org.hibernate.annotations.UuidGenerator;
 
@@ -14,6 +14,9 @@ import java.util.UUID;
 @Table(name = "products")
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
     @Id
     @UuidGenerator
@@ -30,8 +33,7 @@ public class Product {
     @Column(name = "stock_quantity", nullable = false)
     private Integer stockQuantity;
     
-    @Column(name = "sku", unique = true)
-    private String sku;
+
     
     @Column(name = "weight")
     private Double weight;
@@ -49,8 +51,7 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ProductImage> images;
     
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Inventory> inventoryHistory;
+
     
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -61,5 +62,9 @@ public class Product {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private Status status;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "productType", nullable = false)
+    private ProductType productType;
 
 }

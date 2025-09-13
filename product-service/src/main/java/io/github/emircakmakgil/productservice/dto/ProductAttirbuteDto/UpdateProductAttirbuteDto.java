@@ -11,10 +11,7 @@ public class UpdateProductAttirbuteDto {
     private UUID productId;
     private String attributeName;
     private String attributeValue;
-    private String attributeType;
     private String unit;
-    private Integer sortOrder;
     private Boolean isSearchable;
     private Boolean isFilterable;
-    private Boolean isVisible;
 }

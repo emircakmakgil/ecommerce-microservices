@@ -2,8 +2,7 @@ package io.github.emircakmakgil.productservice.entity;
 
 import jakarta.persistence.*;
 import io.github.emircakmakgil.productservice.model.enums.Status;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
@@ -14,6 +13,9 @@ import java.util.UUID;
 @Table(name = "categories")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Category {
     @Id
     @UuidGenerator
@@ -37,10 +39,7 @@ public class Category {
     
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<Product> products;
-    
-    @Column(name = "sort_order")
-    private Integer sortOrder;
-    
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
     
@@ -50,11 +49,5 @@ public class Category {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private Status status;
-    
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
-    }
 
 }
