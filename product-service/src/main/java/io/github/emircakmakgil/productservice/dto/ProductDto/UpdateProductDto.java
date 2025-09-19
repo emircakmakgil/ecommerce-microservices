@@ -4,6 +4,7 @@ import io.github.emircakmakgil.productservice.model.enums.ProductType;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 @Getter
 @Setter
@@ -11,13 +12,13 @@ public class UpdateProductDto {
     private UUID id;
     private String name;
     private String description;
-    private Double price;
+    private BigDecimal price;
     private Integer stockQuantity;
     private Double weight;
     private ProductType productType;
 
 
-    public UpdateProductDto( String name, String description, Double price, Integer stockQuantity,
+    public UpdateProductDto( String name, String description, BigDecimal price, Integer stockQuantity,
                             Double weight,ProductType productType) {
         this.name = name;
         this.description = description;

@@ -9,6 +9,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -17,7 +18,7 @@ import java.util.UUID;
 public class ProductListiningDto {
     private String name;
     private String description;
-    private Double price;
+    private BigDecimal price;
     private Integer stockQuantity;
     private Double weight;
     private Status status;
@@ -26,7 +27,7 @@ public class ProductListiningDto {
 
 
 
-    public ProductListiningDto(String name, String description, Double price, Integer stockQuantity, Double weight,Status status,ProductType productType) {
+    public ProductListiningDto(String name, String description, BigDecimal price, Integer stockQuantity, Double weight,Status status,ProductType productType) {
         this.name = name;
         this.description = description;
         this.price = price;
