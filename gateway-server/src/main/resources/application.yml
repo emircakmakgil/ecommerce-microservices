@@ -1,6 +1,30 @@
 spring:
     application:
         name:  "gateway-server"
+    cloud:
+        gateway:
+            routes:
+                - id: "product_service"
+                  uri: "lb://product_service"
+                  predicates:
+                    - "Path=/api/v1/product/**"
+                - id: "order_service"
+                  uri: "lb://order_service"
+                  predicates:
+                    - "Path=/api/v1/order/**"
+                - id: "user_service"
+                  uri: "lb://user_service"
+                  predicates:
+                    - "Path=/api/v1/user/**"
+                - id: "notification_service"
+                  uri: "lb://notification_service"
+                  predicates:
+                    - "Path=/api/v1/notification/**"
+                - id: "payment_service"
+                  uri: "lb://payment_service"
+                  predicates:
+                    - "Path=/api/v1/payment/**"
+
 
 server:
   port: 8080
