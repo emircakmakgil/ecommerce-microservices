@@ -2,7 +2,7 @@ spring:
   application:
     name: product_service
   datasource:
-    url: "jdbc:postgresql://localhost:5432/product_service"
+    url: "jdbc:postgresql://localhost:5433/product_service"
     username: postgres
     password: test
   jpa:
@@ -14,3 +14,10 @@ spring:
       ddlAuto: update
 server:
   port: 8083
+
+eureka:
+    client:
+        service-url:
+            defaultZone: "http://localhost:8888/eureka/"
+        register-with-eureka: true
+        fetch-registry: true

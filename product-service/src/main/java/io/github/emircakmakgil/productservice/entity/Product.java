@@ -6,6 +6,7 @@ import lombok.*;
 import io.github.emircakmakgil.productservice.model.enums.Status;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -28,7 +29,7 @@ public class Product {
     private String description;
     
     @Column(nullable = false, precision = 10, scale = 2)
-    private Double price;
+    private BigDecimal price;
     
     @Column(name = "stock_quantity", nullable = false)
     private Integer stockQuantity;
