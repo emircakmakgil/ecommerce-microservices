@@ -1,12 +1,14 @@
 package io.github.emircakmakgil.productservice.controller;
 
+import io.github.emircakmakgil.productservice.dto.ProductDto.DeleteProductDto;
+import io.github.emircakmakgil.productservice.dto.ProductDto.UpdateProductDto;
+import io.github.emircakmakgil.productservice.dto.ProductImageDto.CreateProductImageDto;
+import io.github.emircakmakgil.productservice.dto.ProductImageDto.DeleteProductImageDto;
 import io.github.emircakmakgil.productservice.dto.ProductImageDto.ProductImageListiningDto;
+import io.github.emircakmakgil.productservice.dto.ProductImageDto.UpdateProductImageDto;
 import io.github.emircakmakgil.productservice.service.ProductImageService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,7 +22,22 @@ public class ProductImageController {
     @GetMapping
     @ResponseStatus(code= HttpStatus.OK)
     public List<ProductImageListiningDto> getProductImages() {
-        return null;
+        return this.productImageService.getAll();
+    }
+    @PostMapping
+    @ResponseStatus(code= HttpStatus.CREATED)
+    public void addProductImage(@RequestBody CreateProductImageDto createProductImageDto){
+        this.productImageService.add(createProductImageDto);
+    }
+    @PutMapping
+    @ResponseStatus(code= HttpStatus.OK)
+    public void update(@RequestBody UpdateProductImageDto updateProductImageDto){
+        this.productImageService.update(updateProductImageDto);
+    }
+    @DeleteMapping
+    @ResponseStatus(code= HttpStatus.OK)
+    public void delete(@RequestBody DeleteProductImageDto deleteProductImageDto){
+        this.productImageService.delete(deleteProductImageDto);
     }
 
 }

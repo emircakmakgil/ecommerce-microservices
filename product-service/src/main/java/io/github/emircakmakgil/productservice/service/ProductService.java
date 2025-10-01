@@ -1,7 +1,7 @@
 package io.github.emircakmakgil.productservice.service;
 
-import io.github.emircakmakgil.productservice.dto.CategoryDto.DeleteCategoryDto;
 import io.github.emircakmakgil.productservice.dto.ProductDto.CreateProductDto;
+import io.github.emircakmakgil.productservice.dto.ProductDto.DeleteProductDto;
 import io.github.emircakmakgil.productservice.dto.ProductDto.ProductListiningDto;
 import io.github.emircakmakgil.productservice.dto.ProductDto.UpdateProductDto;
 import io.github.emircakmakgil.productservice.entity.Product;
@@ -15,6 +15,6 @@ public interface ProductService {
     void add(CreateProductDto createProductDto);
     List<ProductListiningDto> getAll();
     Product update(UpdateProductDto updateProductDto);
-    void delete(DeleteCategoryDto deleteCategoryDto);
+    void delete(DeleteProductDto deleteProductDto);
 
 }

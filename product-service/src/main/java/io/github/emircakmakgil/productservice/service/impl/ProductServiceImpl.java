@@ -1,7 +1,7 @@
 package io.github.emircakmakgil.productservice.service.impl;
 
-import io.github.emircakmakgil.productservice.dto.CategoryDto.DeleteCategoryDto;
 import io.github.emircakmakgil.productservice.dto.ProductDto.CreateProductDto;
+import io.github.emircakmakgil.productservice.dto.ProductDto.DeleteProductDto;
 import io.github.emircakmakgil.productservice.dto.ProductDto.ProductListiningDto;
 import io.github.emircakmakgil.productservice.dto.ProductDto.UpdateProductDto;
 import io.github.emircakmakgil.productservice.entity.Product;
@@ -62,8 +62,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void delete(DeleteCategoryDto deleteCategoryDto) {
-        Product product = productRepository.findById(deleteCategoryDto.getId()).orElseThrow(() -> new RuntimeException("Product not found with id: " + deleteCategoryDto.getId()));
+    public void delete(DeleteProductDto deleteProductDto) {
+        Product product = productRepository.findById(deleteProductDto.getId()).orElseThrow(() -> new RuntimeException("Product not found with id: " + deleteProductDto.getId()));
         productRepository.delete(product);
 
     }
