@@ -1,8 +1,8 @@
 package io.github.emircakmakgil.productservice.mapper;
 
-import io.github.emircakmakgil.productservice.dto.BrandDto.UpdateBrandDto;
 import io.github.emircakmakgil.productservice.dto.CategoryDto.CategoryListiningDto;
 import io.github.emircakmakgil.productservice.dto.CategoryDto.CreateCategoryDto;
+import io.github.emircakmakgil.productservice.dto.CategoryDto.UpdateCategoryDto;
 import io.github.emircakmakgil.productservice.entity.Category;
 import lombok.Data;
 import org.springframework.stereotype.Component;
@@ -18,13 +18,14 @@ public class CategoryMapper {
                 .imageUrl(createCategoryDto.getImageUrl())
                 .build();
     }
-    public Category updateCategoryFromUpdateCategoryDto(UpdateBrandDto updateBrandDto){
+    public Category updateCategoryFromUpdateCategoryDto(UpdateCategoryDto updateCategoryDto){
          return Category.builder()
-                 .name(updateBrandDto.getName())
-                 .description(updateBrandDto.getDescription())
-                 .imageUrl(updateBrandDto.getLogoUrl())
-                 .status(updateBrandDto.getStatus())
+                 .name(updateCategoryDto.getName())
+                 .description(updateCategoryDto.getDescription())
+                 .status(updateCategoryDto.getStatus())
+                 .imageUrl(updateCategoryDto.getImageUrl())
                 .build();
+
     }
     public CategoryListiningDto toCategoryListiningDto(Category category){
         return new CategoryListiningDto(

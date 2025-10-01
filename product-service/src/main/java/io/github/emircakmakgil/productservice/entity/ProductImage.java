@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Entity
@@ -45,5 +46,6 @@ public class ProductImage {
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
+
 
 }
