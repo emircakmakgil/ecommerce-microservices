@@ -21,15 +21,14 @@ public class ProductMapper {
                 .productType(createProductDto.getProductType())
                 .build();
     }
-    public Product updateProductFromUpdatedProductDto(UpdateProductDto updateProductDto){
-        return Product.builder()
-                .description(updateProductDto.getDescription())
-                .price(updateProductDto.getPrice())
-                .stockQuantity(updateProductDto.getStockQuantity())
-                .weight(updateProductDto.getWeight())
-                .productType(updateProductDto.getProductType())
-                .name(updateProductDto.getName()).
-                build();
+    public void updateProductFromUpdatedProductDto(UpdateProductDto updateProductDto, Product product){
+                product.setDescription(updateProductDto.getDescription());
+                product.setPrice(updateProductDto.getPrice());
+                product.setStockQuantity(updateProductDto.getStockQuantity());
+                product.setWeight(updateProductDto.getWeight());
+                product.setProductType(updateProductDto.getProductType());
+                product.setName(updateProductDto.getName());
+
     }
     public ProductListiningDto toProductListiningDto(Product product){
         return new ProductListiningDto(
@@ -42,4 +41,6 @@ public class ProductMapper {
                 product.getProductType()
         );
     }
+
+
 }
