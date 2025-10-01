@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+import static io.github.emircakmakgil.productservice.constant.GeneralConstant.PRODUCT_NOT_FOUND;
+
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
@@ -33,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
     public Product findById(UUID id) {
         Product product= productRepository
                 .findById(id)
-                .orElseThrow(()-> new RuntimeException("Product not found with id: " + id));
+                .orElseThrow(()-> new RuntimeException(PRODUCT_NOT_FOUND + id));
 
         return product;
     }
@@ -56,14 +59,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product update(UpdateProductDto updateProductDto) {
-        Product product=productRepository.findById(updateProductDto.getId()).orElseThrow(()->new RuntimeException("Product not found with id: "+updateProductDto.getId()));
+        Product product=productRepository.findById(updateProductDto.getId()).orElseThrow(()->new RuntimeException(PRODUCT_NOT_FOUND+updateProductDto.getId()));
         productMapper.updateProductFromUpdatedProductDto(updateProductDto,product);
         return productRepository.save(product);
     }
 
     @Override
     public void delete(DeleteProductDto deleteProductDto) {
-        Product product = productRepository.findById(deleteProductDto.getId()).orElseThrow(() -> new RuntimeException("Product not found with id: " + deleteProductDto.getId()));
+        Product product = productRepository.findById(deleteProductDto.getId()).orElseThrow(() -> new RuntimeException(PRODUCT_NOT_FOUND + deleteProductDto.getId()));
         productRepository.delete(product);
 
     }
