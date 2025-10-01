@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import static io.github.emircakmakgil.productservice.constant.GeneralConstant.PRODUCT_ATTRIBUTE_NOT_FOUND;
+
 @Service
 public class ProductAttirbuteServiceImpl implements ProductAttirbuteService {
     private final ProductAttributeRepository productAttributeRepository;
@@ -34,7 +36,7 @@ public class ProductAttirbuteServiceImpl implements ProductAttirbuteService {
 
     @Override
     public ProductAttribute findById(UUID id) {
-            ProductAttribute productAttribute=productAttributeRepository.findById(id).orElseThrow(()->new RuntimeException("Product Attribute not found with id: "+id));
+            ProductAttribute productAttribute=productAttributeRepository.findById(id).orElseThrow(()->new RuntimeException(PRODUCT_ATTRIBUTE_NOT_FOUND+id));
         return productAttribute;
     }
 
@@ -57,7 +59,7 @@ public class ProductAttirbuteServiceImpl implements ProductAttirbuteService {
     @Override
     public ProductAttribute update(UpdateProductAttirbuteDto dto) {
         ProductAttribute entity = productAttributeRepository.findById(dto.getId())
-                .orElseThrow(() -> new RuntimeException("Product Attribute not found with id: " + dto.getId()));
+                .orElseThrow(() -> new RuntimeException(PRODUCT_ATTRIBUTE_NOT_FOUND+ dto.getId()));
 
         productAttirbuteMapper.updateProductAttributeFromUpdateProductAttributeDto(dto, entity);
 
@@ -68,7 +70,7 @@ public class ProductAttirbuteServiceImpl implements ProductAttirbuteService {
     public void delete(DeleteProductAttirbuteDto deleteProductAttirbuteDto) {
         ProductAttribute productAttribute=productAttributeRepository
                 .findById(deleteProductAttirbuteDto.getId())
-                .orElseThrow(()->new RuntimeException("Product Attribute not found with id: "+deleteProductAttirbuteDto.getId()));
+                .orElseThrow(()->new RuntimeException(PRODUCT_ATTRIBUTE_NOT_FOUND+deleteProductAttirbuteDto.getId()));
         productAttributeRepository.delete(productAttribute);
 
     }

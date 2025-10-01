@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import static io.github.emircakmakgil.productservice.constant.GeneralConstant.PRODUCT_IMAGE_NOT_FOUND;
+
 @Service
 public class ProductImageServiceImpl implements ProductImageService {
     private final ProductImageRepository productImageRepository;
@@ -33,7 +35,7 @@ public class ProductImageServiceImpl implements ProductImageService {
     public ProductImage findById(UUID id) {
         ProductImage productImage=productImageRepository
                 .findById(id)
-                .orElseThrow(()->new RuntimeException("Product Image not found with id: "+id));
+                .orElseThrow(()->new RuntimeException(PRODUCT_IMAGE_NOT_FOUND+id));
         return productImage;
     }
 
@@ -55,7 +57,7 @@ public class ProductImageServiceImpl implements ProductImageService {
 
     @Override
     public ProductImage update(UpdateProductImageDto updateProductImageDto) {
-        ProductImage productImage=productImageRepository.findById(updateProductImageDto.getId()).orElseThrow(()->new RuntimeException("Product Image not found with id: "+updateProductImageDto.getId()));
+        ProductImage productImage=productImageRepository.findById(updateProductImageDto.getId()).orElseThrow(()->new RuntimeException(PRODUCT_IMAGE_NOT_FOUND+updateProductImageDto.getId()));
         productImageMapper.updateProductImageFromUpdatedProductImage(updateProductImageDto,productImage);
         return productImageRepository.save(productImage);
     }
@@ -64,7 +66,7 @@ public class ProductImageServiceImpl implements ProductImageService {
     public void delete(DeleteProductImageDto deleteProductImageDto) {
         ProductImage productImage=productImageRepository
                 .findById(deleteProductImageDto.getId())
-                .orElseThrow(()->new RuntimeException("Product Image not found with id: "+deleteProductImageDto.getId()));
+                .orElseThrow(()->new RuntimeException(PRODUCT_IMAGE_NOT_FOUND+deleteProductImageDto.getId()));
         productImageRepository.delete(productImage);
     }
 }

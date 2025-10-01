@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import static io.github.emircakmakgil.productservice.constant.GeneralConstant.CATEGORY_NOT_FOUND;
+
 @Service
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
@@ -33,7 +35,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category findById(UUID id) {
-        Category category=categoryRepository.findById(id).orElseThrow(()->new RuntimeException("Category not found with id: "+id));
+        Category category=categoryRepository.findById(id).orElseThrow(()->new RuntimeException(CATEGORY_NOT_FOUND+id));
         //TODO: Add logging
         return category;
     }
@@ -63,7 +65,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void delete(DeleteCategoryDto deleteCategoryDto) {
-        Category category=categoryRepository.findById(deleteCategoryDto.getId()).orElseThrow(()->new RuntimeException("Category not found with id: "+deleteCategoryDto.getId()));
+        Category category=categoryRepository.findById(deleteCategoryDto.getId()).orElseThrow(()->new RuntimeException(CATEGORY_NOT_FOUND+deleteCategoryDto.getId()));
         categoryRepository.delete(category);
 
     }

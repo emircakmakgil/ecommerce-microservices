@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import static io.github.emircakmakgil.productservice.constant.GeneralConstant.BRAND_NOT_FOUND;
+
 @Service
 public class BrandServiceImpl implements BrandService {
 
@@ -34,7 +36,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Brand findById(UUID id) {
-        Brand brand=brandRepository.findById(id).orElseThrow(()->new RuntimeException("Brand not found with id: "+id));
+        Brand brand=brandRepository.findById(id).orElseThrow(()->new RuntimeException(BRAND_NOT_FOUND+id));
         return brand;
     }
 
@@ -64,7 +66,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public void delete(DeleteBrandDto deleteBrandDto) {
-        Brand brand=brandRepository.findById(deleteBrandDto.getId()).orElseThrow(()->new RuntimeException("Brand not found with id: "+deleteBrandDto.getId()));
+        Brand brand=brandRepository.findById(deleteBrandDto.getId()).orElseThrow(()->new RuntimeException(BRAND_NOT_FOUND+deleteBrandDto.getId()));
         brandRepository.delete(brand);
     }
 }
