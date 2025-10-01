@@ -5,41 +5,66 @@ import io.github.emircakmakgil.productservice.dto.BrandDto.CreateBrandDto;
 import io.github.emircakmakgil.productservice.dto.BrandDto.DeleteBrandDto;
 import io.github.emircakmakgil.productservice.dto.BrandDto.UpdateBrandDto;
 import io.github.emircakmakgil.productservice.entity.Brand;
+import io.github.emircakmakgil.productservice.mapper.BrandMapper;
+import io.github.emircakmakgil.productservice.repository.BrandRepository;
 import io.github.emircakmakgil.productservice.service.BrandService;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class BrandServiceImpl implements BrandService {
+
+    private final BrandRepository brandRepository;
+    private final BrandMapper brandMapper;
+
+    public BrandServiceImpl(BrandRepository brandRepository, BrandMapper brandMapper) {
+        this.brandRepository = brandRepository;
+        this.brandMapper = brandMapper;
+    }
+
+    //TODO: Add logging
+    //TODO: ADD EXCEPTION HANDLING
     @Override
     public List<Brand> findAll(List<UUID> brand) {
-        return List.of();
+        List<Brand> brands = brandRepository.findAllById(brand);
+        return brands;
     }
 
     @Override
     public Brand findById(UUID id) {
-        return null;
+        Brand brand=brandRepository.findById(id).orElseThrow(()->new RuntimeException("Brand not found with id: "+id));
+        return brand;
     }
 
     @Override
     public void add(CreateBrandDto createBrandDto) {
+        Brand brand=brandMapper.createBrandFromCreateBrandDto(createBrandDto);
+        brandRepository.save(brand);
 
     }
 
     @Override
     public List<BrandListiningDto> getAll() {
-        return List.of();
+        List<Brand> brands=brandRepository.findAll();
+        List<BrandListiningDto> brandListiningDtos=brands
+                .stream()
+                .map(brandMapper::toBrandListiningDto)
+                .collect(Collectors.toList());
+        return brandListiningDtos;
     }
 
     @Override
     public Brand update(UpdateBrandDto updateBrandDto) {
-        return null;
+            Brand updatedBrand=brandMapper.updateBrandFromUpdateBrandDto(updateBrandDto);
+            brandRepository.save(updatedBrand);
+            return updatedBrand;
     }
 
     @Override
     public void delete(DeleteBrandDto deleteBrandDto) {
-
+        Brand brand=brandRepository.findById(deleteBrandDto.getId()).orElseThrow(()->new RuntimeException("Brand not found with id: "+deleteBrandDto.getId()));
+        brandRepository.delete(brand);
     }
 }

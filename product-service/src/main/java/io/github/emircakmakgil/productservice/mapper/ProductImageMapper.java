@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Component
 @Data
 public class ProductImageMapper {
-    public ProductImage createProductImageFromCreateProductImageUrl(CreateProductImageDto createProductImageDto){
+    public ProductImage createProductImageFromCreateProductImage(CreateProductImageDto createProductImageDto){
         return ProductImage.builder()
                 .imageUrl(createProductImageDto.getImageUrl())
                 .altText(createProductImageDto.getAltText())
@@ -23,16 +23,15 @@ public class ProductImageMapper {
                 .createdAt(java.time.LocalDateTime.now())
                 .build();
     }
-    public ProductImage updateProductImageFromUpdatedProductImage(UpdateProductImageDto updateProductImageDto){
-        return ProductImage.builder()
-                .imageUrl(updateProductImageDto.getImageUrl())
-                .altText(updateProductImageDto.getAltText())
-                .title(updateProductImageDto.getTitle())
-                .fileSize(updateProductImageDto.getFileSize())
-                .width(updateProductImageDto.getWidth())
-                .height(updateProductImageDto.getHeight())
-                .updatedAt(LocalDateTime.now())
-                .build();
+    public void updateProductImageFromUpdatedProductImage(UpdateProductImageDto updateProductImageDto, ProductImage productImage) {
+
+                productImage.setImageUrl(updateProductImageDto.getImageUrl());
+                productImage.setAltText(updateProductImageDto.getAltText());
+                productImage.setTitle(updateProductImageDto.getTitle());
+                productImage.setFileSize(updateProductImageDto.getFileSize());
+                productImage.setWidth(updateProductImageDto.getWidth());
+                productImage.setHeight(updateProductImageDto.getHeight());
+                productImage.setUpdatedAt(LocalDateTime.now());
     }
     public ProductImageListiningDto toProductImageListiningDto(ProductImage productImage){
         return new ProductImageListiningDto(

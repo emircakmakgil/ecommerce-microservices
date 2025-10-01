@@ -20,16 +20,14 @@ public class ProductAttirbuteMapper {
                 .isFilterable(createProductAttirbuteDto.getIsFilterable())
                 .build();
     }
-    public ProductAttribute updateProductAttributeFromUpdateProductAttributeDto(UpdateProductAttirbuteDto updateProductAttirbuteDto){
-        return ProductAttribute
-                .builder()
-                .attributeName(updateProductAttirbuteDto.getAttributeName())
-                .attributeValue(updateProductAttirbuteDto.getAttributeValue())
-                .unit(updateProductAttirbuteDto.getUnit())
-                .isFilterable(updateProductAttirbuteDto.getIsFilterable())
-                .isSearchable(updateProductAttirbuteDto.getIsSearchable())
-                .build();
+    public void updateProductAttributeFromUpdateProductAttributeDto(UpdateProductAttirbuteDto updateProductAttirbuteDto, ProductAttribute entity) {
+        entity.setAttributeName(updateProductAttirbuteDto.getAttributeName());
+        entity.setAttributeValue(updateProductAttirbuteDto.getAttributeValue());
+        entity.setUnit(updateProductAttirbuteDto.getUnit());
+        entity.setIsFilterable(updateProductAttirbuteDto.getIsFilterable());
+        entity.setIsSearchable(updateProductAttirbuteDto.getIsSearchable());
     }
+
     public ProductAttirbuteListiningDto toProductAttributeListiningDto(ProductAttribute productAttribute){
         return new ProductAttirbuteListiningDto(productAttribute.getAttributeName(),
                 productAttribute.getAttributeValue(),
