@@ -7,6 +7,8 @@ import io.github.emircakmakgil.productservice.entity.ProductAttribute;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 @Data
 public class ProductAttirbuteMapper {
@@ -18,6 +20,7 @@ public class ProductAttirbuteMapper {
                 .unit(createProductAttirbuteDto.getUnit())
                 .isSearchable(createProductAttirbuteDto.getIsSearchable())
                 .isFilterable(createProductAttirbuteDto.getIsFilterable())
+                .createdAt(LocalDateTime.now())
                 .build();
     }
     public void updateProductAttributeFromUpdateProductAttributeDto(UpdateProductAttirbuteDto updateProductAttirbuteDto, ProductAttribute entity) {
@@ -26,6 +29,7 @@ public class ProductAttirbuteMapper {
         entity.setUnit(updateProductAttirbuteDto.getUnit());
         entity.setIsFilterable(updateProductAttirbuteDto.getIsFilterable());
         entity.setIsSearchable(updateProductAttirbuteDto.getIsSearchable());
+        entity.setUpdatedAt(LocalDateTime.now());
     }
 
     public ProductAttirbuteListiningDto toProductAttributeListiningDto(ProductAttribute productAttribute){

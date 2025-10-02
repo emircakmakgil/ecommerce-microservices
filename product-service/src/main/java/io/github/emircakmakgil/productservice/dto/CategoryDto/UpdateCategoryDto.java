@@ -4,6 +4,7 @@ import io.github.emircakmakgil.productservice.model.enums.Status;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -14,6 +15,5 @@ public class UpdateCategoryDto {
     private String description;
     private String imageUrl;
     private Status status;
-
 
 }

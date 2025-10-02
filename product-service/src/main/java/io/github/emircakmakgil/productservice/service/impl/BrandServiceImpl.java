@@ -9,6 +9,8 @@ import io.github.emircakmakgil.productservice.mapper.BrandMapper;
 import io.github.emircakmakgil.productservice.repository.BrandRepository;
 import io.github.emircakmakgil.productservice.service.BrandService;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -43,6 +45,7 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public void add(CreateBrandDto createBrandDto) {
         Brand brand=brandMapper.createBrandFromCreateBrandDto(createBrandDto);
+        brand.setCreatedAt(LocalDateTime.now());
         brandRepository.save(brand);
 
     }
@@ -59,9 +62,9 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Brand update(UpdateBrandDto updateBrandDto) {
-            Brand updatedBrand=brandMapper.updateBrandFromUpdateBrandDto(updateBrandDto);
-            brandRepository.save(updatedBrand);
-            return updatedBrand;
+            Brand updatedBrand=brandRepository.findById(updateBrandDto.getId()).orElseThrow(()->new RuntimeException(BRAND_NOT_FOUND+updateBrandDto.getId()));
+            brandMapper.updateBrandFromUpdateBrandDto(updateBrandDto,updatedBrand);
+            return brandRepository.save(updatedBrand);
     }
 
     @Override

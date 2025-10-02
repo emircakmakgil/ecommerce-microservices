@@ -5,10 +5,12 @@ import io.github.emircakmakgil.productservice.dto.ProductAttirbuteDto.DeleteProd
 import io.github.emircakmakgil.productservice.dto.ProductAttirbuteDto.ProductAttirbuteListiningDto;
 import io.github.emircakmakgil.productservice.dto.ProductAttirbuteDto.UpdateProductAttirbuteDto;
 
+import io.github.emircakmakgil.productservice.entity.Product;
 import io.github.emircakmakgil.productservice.entity.ProductAttribute;
 import io.github.emircakmakgil.productservice.mapper.ProductAttirbuteMapper;
 import io.github.emircakmakgil.productservice.repository.ProductAttributeRepository;
 import io.github.emircakmakgil.productservice.service.ProductAttirbuteService;
+import io.github.emircakmakgil.productservice.service.ProductService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,10 +23,11 @@ import static io.github.emircakmakgil.productservice.constant.GeneralConstant.PR
 public class ProductAttirbuteServiceImpl implements ProductAttirbuteService {
     private final ProductAttributeRepository productAttributeRepository;
     private final ProductAttirbuteMapper productAttirbuteMapper;
-
-    public ProductAttirbuteServiceImpl(ProductAttributeRepository productAttributeRepository, ProductAttirbuteMapper productAttirbuteMapper) {
+    private final ProductService productService;
+    public ProductAttirbuteServiceImpl(ProductAttributeRepository productAttributeRepository, ProductAttirbuteMapper productAttirbuteMapper, ProductService productService) {
         this.productAttributeRepository = productAttributeRepository;
         this.productAttirbuteMapper = productAttirbuteMapper;
+        this.productService = productService;
     }
 
 
@@ -42,7 +45,9 @@ public class ProductAttirbuteServiceImpl implements ProductAttirbuteService {
 
     @Override
     public void add(CreateProductAttirbuteDto createProductAttirbuteDto) {
+        Product product=productService.findById(createProductAttirbuteDto.getProductId()).orElseThrow(()-> new RuntimeException("Product Not Found"));
         ProductAttribute productAttribute=productAttirbuteMapper.createProductAttributeFromCreateProductAttributeDto(createProductAttirbuteDto);
+        productAttribute.setProduct(product);
         productAttributeRepository.save(productAttribute);
     }
 

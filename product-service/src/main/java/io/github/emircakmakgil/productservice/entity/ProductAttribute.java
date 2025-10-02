@@ -20,10 +20,10 @@ public class ProductAttribute {
     private UUID id;
     
     @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "product_id")
     private Product product;
     
-    @Column(name = "attribute_name", nullable = false)
+    @Column(name = "attribute_name")
     private String attributeName;
     
     @Column(name = "attribute_value", columnDefinition = "TEXT")
@@ -38,7 +38,7 @@ public class ProductAttribute {
     @Column(name = "is_filterable")
     private Boolean isFilterable;
     
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
     
     @Column(name = "updated_at")

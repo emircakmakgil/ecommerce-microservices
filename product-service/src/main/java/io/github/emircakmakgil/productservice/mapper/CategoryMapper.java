@@ -7,6 +7,8 @@ import io.github.emircakmakgil.productservice.entity.Category;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 @Data
 public class CategoryMapper {
@@ -16,16 +18,15 @@ public class CategoryMapper {
                 .name(createCategoryDto.getName())
                 .description(createCategoryDto.getDescription())
                 .imageUrl(createCategoryDto.getImageUrl())
+                .status(createCategoryDto.getStatus())
                 .build();
     }
-    public Category updateCategoryFromUpdateCategoryDto(UpdateCategoryDto updateCategoryDto){
-         return Category.builder()
-                 .name(updateCategoryDto.getName())
-                 .description(updateCategoryDto.getDescription())
-                 .status(updateCategoryDto.getStatus())
-                 .imageUrl(updateCategoryDto.getImageUrl())
-                .build();
-
+    public void updateCategoryFromUpdateCategoryDto(UpdateCategoryDto updateCategoryDto, Category category) {
+                category.setName(updateCategoryDto.getName());
+                category.setDescription(updateCategoryDto.getDescription());
+                category.setStatus(updateCategoryDto.getStatus());
+                category.setImageUrl(updateCategoryDto.getImageUrl());
+                category.setUpdatedAt(LocalDateTime.now());
     }
     public CategoryListiningDto toCategoryListiningDto(Category category){
         return new CategoryListiningDto(

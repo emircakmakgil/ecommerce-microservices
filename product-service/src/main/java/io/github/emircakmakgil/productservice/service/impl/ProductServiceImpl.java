@@ -11,6 +11,7 @@ import io.github.emircakmakgil.productservice.service.ProductService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -33,12 +34,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product findById(UUID id) {
-        Product product= productRepository
-                .findById(id)
-                .orElseThrow(()-> new RuntimeException(PRODUCT_NOT_FOUND + id));
-
-        return product;
+    public Optional<Product> findById(UUID id) {
+        return productRepository.findById(id);
     }
 
     @Override

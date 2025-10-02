@@ -7,11 +7,12 @@ import io.github.emircakmakgil.productservice.dto.ProductDto.UpdateProductDto;
 import io.github.emircakmakgil.productservice.entity.Product;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface ProductService {
     List<Product> findAll(List<UUID> product);
-    Product findById(UUID id);
+    Optional<Product> findById(UUID id);
     void add(CreateProductDto createProductDto);
     List<ProductListiningDto> getAll();
     Product update(UpdateProductDto updateProductDto);

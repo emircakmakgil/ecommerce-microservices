@@ -10,6 +10,7 @@ import io.github.emircakmakgil.productservice.repository.CategoryRepository;
 import io.github.emircakmakgil.productservice.service.CategoryService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -43,6 +44,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void add(CreateCategoryDto createCategoryDto) {
         Category category=categoryMapper.createCategoryFromCreateCategoryDto(createCategoryDto);
+        category.setCreatedAt(LocalDateTime.now());
         categoryRepository.save(category);
     }
 
@@ -58,9 +60,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category update(UpdateCategoryDto updateCategoryDto) {
-        Category updatedCategory=categoryMapper.updateCategoryFromUpdateCategoryDto(updateCategoryDto);
-        categoryRepository.save(updatedCategory);
-        return updatedCategory;
+        Category category=categoryRepository.findById(updateCategoryDto.getId()).orElseThrow(()->new RuntimeException(CATEGORY_NOT_FOUND+updateCategoryDto.getId()));
+        categoryMapper.updateCategoryFromUpdateCategoryDto(updateCategoryDto,category);
+        return categoryRepository.save(category);
     }
 
     @Override
