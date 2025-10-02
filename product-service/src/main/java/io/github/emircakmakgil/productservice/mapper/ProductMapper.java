@@ -7,6 +7,8 @@ import io.github.emircakmakgil.productservice.entity.Product;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Data
 @Component
 public class ProductMapper {
@@ -19,6 +21,8 @@ public class ProductMapper {
                 .stockQuantity(createProductDto.getStockQuantity())
                 .weight(createProductDto.getWeight())
                 .productType(createProductDto.getProductType())
+                .createdAt(LocalDateTime.now())
+                .status(createProductDto.getStatus())
                 .build();
     }
     public void updateProductFromUpdatedProductDto(UpdateProductDto updateProductDto, Product product){
@@ -28,6 +32,8 @@ public class ProductMapper {
                 product.setWeight(updateProductDto.getWeight());
                 product.setProductType(updateProductDto.getProductType());
                 product.setName(updateProductDto.getName());
+                product.setUpdatedAt(LocalDateTime.now());
+                product.setCreatedAt(LocalDateTime.now());
 
     }
     public ProductListiningDto toProductListiningDto(Product product){

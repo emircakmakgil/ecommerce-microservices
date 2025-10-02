@@ -4,10 +4,12 @@ import io.github.emircakmakgil.productservice.dto.ProductImageDto.CreateProductI
 import io.github.emircakmakgil.productservice.dto.ProductImageDto.DeleteProductImageDto;
 import io.github.emircakmakgil.productservice.dto.ProductImageDto.ProductImageListiningDto;
 import io.github.emircakmakgil.productservice.dto.ProductImageDto.UpdateProductImageDto;
+import io.github.emircakmakgil.productservice.entity.Product;
 import io.github.emircakmakgil.productservice.entity.ProductImage;
 import io.github.emircakmakgil.productservice.mapper.ProductImageMapper;
 import io.github.emircakmakgil.productservice.repository.ProductImageRepository;
 import io.github.emircakmakgil.productservice.service.ProductImageService;
+import io.github.emircakmakgil.productservice.service.ProductService;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
@@ -19,10 +21,12 @@ import static io.github.emircakmakgil.productservice.constant.GeneralConstant.PR
 public class ProductImageServiceImpl implements ProductImageService {
     private final ProductImageRepository productImageRepository;
     private final ProductImageMapper productImageMapper;
+    private final ProductService productService;
 
-    public ProductImageServiceImpl(ProductImageRepository productImageRepository, ProductImageMapper productImageMapper) {
+    public ProductImageServiceImpl(ProductImageRepository productImageRepository, ProductImageMapper productImageMapper, ProductService productService) {
         this.productImageRepository = productImageRepository;
         this.productImageMapper = productImageMapper;
+        this.productService = productService;
     }
 
     @Override
@@ -41,7 +45,9 @@ public class ProductImageServiceImpl implements ProductImageService {
 
     @Override
     public void add(CreateProductImageDto createProductImageDto) {
-        ProductImage productImage=productImageMapper.createProductImageFromCreateProductImage(createProductImageDto);
+        Product product=productService.findById(createProductImageDto.getProductId()).orElseThrow(()-> new RuntimeException("Product Not Found"));
+        ProductImage productImage = productImageMapper.createProductImageFromCreateProductImage(createProductImageDto);
+        productImage.setProduct(product);
         productImageRepository.save(productImage);
     }
 

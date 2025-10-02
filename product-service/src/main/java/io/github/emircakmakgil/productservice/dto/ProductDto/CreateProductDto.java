@@ -1,6 +1,7 @@
 package io.github.emircakmakgil.productservice.dto.ProductDto;
 
 import io.github.emircakmakgil.productservice.model.enums.ProductType;
+import io.github.emircakmakgil.productservice.model.enums.Status;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,6 +33,9 @@ public class CreateProductDto {
 
     @DecimalMin(value = "0.0", message = "Weight cannot be negative")
     private Double weight;
+
+
+    private Status status;
 
 
     @NotNull(message = "Product type is required")

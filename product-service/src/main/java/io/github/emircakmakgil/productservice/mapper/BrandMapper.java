@@ -7,6 +7,8 @@ import io.github.emircakmakgil.productservice.entity.Brand;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 @Data
 public class BrandMapper {
@@ -21,16 +23,15 @@ public class BrandMapper {
                 .status(createBrandDto.getStatus())
                 .build();
     }
-    public Brand updateBrandFromUpdateBrandDto(UpdateBrandDto updateBrandDto){
-       return Brand.builder()
-               .name(updateBrandDto.getName())
-               .description(updateBrandDto.getDescription())
-               .countryOfOrigin(updateBrandDto.getCountryOfOrigin())
-               .logoUrl(updateBrandDto.getLogoUrl())
-               .websiteUrl(updateBrandDto.getWebsiteUrl())
-               .foundedYear(updateBrandDto.getFoundedYear())
-               .status(updateBrandDto.getStatus())
-               .build();
+    public void updateBrandFromUpdateBrandDto(UpdateBrandDto updateBrandDto, Brand brand) {
+                brand.setName(updateBrandDto.getName());
+                brand.setDescription(updateBrandDto.getDescription());
+                brand.setCountryOfOrigin(updateBrandDto.getCountryOfOrigin());
+                brand.setLogoUrl(updateBrandDto.getLogoUrl());
+                brand.setWebsiteUrl(updateBrandDto.getWebsiteUrl());
+                brand.setFoundedYear(updateBrandDto.getFoundedYear());
+                brand.setStatus(updateBrandDto.getStatus());
+                brand.setUpdatedAt(LocalDateTime.now());
     }
     public BrandListiningDto toBrandListiningDto(Brand brand){
         return new BrandListiningDto(

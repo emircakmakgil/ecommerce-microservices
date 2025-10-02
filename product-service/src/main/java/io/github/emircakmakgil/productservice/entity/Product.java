@@ -54,7 +54,7 @@ public class Product {
     
 
     
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
     
     @Column(name = "updated_at")

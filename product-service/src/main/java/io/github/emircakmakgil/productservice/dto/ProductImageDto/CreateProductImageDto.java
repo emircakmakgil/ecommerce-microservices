@@ -3,7 +3,6 @@ package io.github.emircakmakgil.productservice.dto.ProductImageDto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 @Getter
 @Setter
@@ -15,6 +14,5 @@ public class CreateProductImageDto {
     private Long fileSize;
     private Integer width;
     private Integer height;
-    private LocalDateTime createdAt;
 
 }

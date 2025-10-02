@@ -43,7 +43,7 @@ public class Brand {
     @OneToMany(mappedBy = "brand")
     private List<Product> products;
     
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
     
     @Column(name = "updated_at")

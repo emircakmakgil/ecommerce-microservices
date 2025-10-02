@@ -24,10 +24,8 @@ spring:
                   uri: "lb://payment_service"
                   predicates:
                     - "Path=/api/v1/payment/**"
-
-
-server:
-  port: 8080
+    config:
+      import: "optional:configserver:"
 
 eureka:
   client:
