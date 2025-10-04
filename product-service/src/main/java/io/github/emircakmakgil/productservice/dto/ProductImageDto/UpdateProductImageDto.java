@@ -15,5 +15,8 @@ public class UpdateProductImageDto {
     private Long fileSize;
     private Integer width;
     private Integer height;
+    private UUID productId;
+
+
 
 }

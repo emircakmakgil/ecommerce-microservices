@@ -1,5 +1,6 @@
 package io.github.emircakmakgil.productservice.service.impl;
 
+import io.github.emircakmakgil.productservice.core.exception.type.BusinessException;
 import io.github.emircakmakgil.productservice.dto.ProductAttirbuteDto.CreateProductAttirbuteDto;
 import io.github.emircakmakgil.productservice.dto.ProductAttirbuteDto.DeleteProductAttirbuteDto;
 import io.github.emircakmakgil.productservice.dto.ProductAttirbuteDto.ProductAttirbuteListiningDto;
@@ -39,13 +40,13 @@ public class ProductAttirbuteServiceImpl implements ProductAttirbuteService {
 
     @Override
     public ProductAttribute findById(UUID id) {
-            ProductAttribute productAttribute=productAttributeRepository.findById(id).orElseThrow(()->new RuntimeException(PRODUCT_ATTRIBUTE_NOT_FOUND+id));
+            ProductAttribute productAttribute=productAttributeRepository.findById(id).orElseThrow(()->new BusinessException(PRODUCT_ATTRIBUTE_NOT_FOUND+id));
         return productAttribute;
     }
 
     @Override
     public void add(CreateProductAttirbuteDto createProductAttirbuteDto) {
-        Product product=productService.findById(createProductAttirbuteDto.getProductId()).orElseThrow(()-> new RuntimeException("Product Not Found"));
+        Product product=productService.findById(createProductAttirbuteDto.getProductId());
         ProductAttribute productAttribute=productAttirbuteMapper.createProductAttributeFromCreateProductAttributeDto(createProductAttirbuteDto);
         productAttribute.setProduct(product);
         productAttributeRepository.save(productAttribute);
@@ -63,10 +64,12 @@ public class ProductAttirbuteServiceImpl implements ProductAttirbuteService {
 
     @Override
     public ProductAttribute update(UpdateProductAttirbuteDto dto) {
+        Product product=productService.findById(dto.getProductId());
         ProductAttribute entity = productAttributeRepository.findById(dto.getId())
-                .orElseThrow(() -> new RuntimeException(PRODUCT_ATTRIBUTE_NOT_FOUND+ dto.getId()));
+                .orElseThrow(() -> new BusinessException(PRODUCT_ATTRIBUTE_NOT_FOUND+ dto.getId()));
 
         productAttirbuteMapper.updateProductAttributeFromUpdateProductAttributeDto(dto, entity);
+        entity.setProduct(product);
 
         return productAttributeRepository.save(entity);
     }
@@ -75,7 +78,7 @@ public class ProductAttirbuteServiceImpl implements ProductAttirbuteService {
     public void delete(DeleteProductAttirbuteDto deleteProductAttirbuteDto) {
         ProductAttribute productAttribute=productAttributeRepository
                 .findById(deleteProductAttirbuteDto.getId())
-                .orElseThrow(()->new RuntimeException(PRODUCT_ATTRIBUTE_NOT_FOUND+deleteProductAttirbuteDto.getId()));
+                .orElseThrow(()->new BusinessException(PRODUCT_ATTRIBUTE_NOT_FOUND+deleteProductAttirbuteDto.getId()));
         productAttributeRepository.delete(productAttribute);
 
     }

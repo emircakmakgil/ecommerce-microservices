@@ -1,5 +1,6 @@
 package io.github.emircakmakgil.productservice.service.impl;
 
+import io.github.emircakmakgil.productservice.core.exception.type.BusinessException;
 import io.github.emircakmakgil.productservice.dto.ProductImageDto.CreateProductImageDto;
 import io.github.emircakmakgil.productservice.dto.ProductImageDto.DeleteProductImageDto;
 import io.github.emircakmakgil.productservice.dto.ProductImageDto.ProductImageListiningDto;
@@ -45,7 +46,7 @@ public class ProductImageServiceImpl implements ProductImageService {
 
     @Override
     public void add(CreateProductImageDto createProductImageDto) {
-        Product product=productService.findById(createProductImageDto.getProductId()).orElseThrow(()-> new RuntimeException("Product Not Found"));
+        Product product=productService.findById(createProductImageDto.getProductId());
         ProductImage productImage = productImageMapper.createProductImageFromCreateProductImage(createProductImageDto);
         productImage.setProduct(product);
         productImageRepository.save(productImage);
@@ -63,8 +64,10 @@ public class ProductImageServiceImpl implements ProductImageService {
 
     @Override
     public ProductImage update(UpdateProductImageDto updateProductImageDto) {
+        Product product=productService.findById(updateProductImageDto.getProductId());
         ProductImage productImage=productImageRepository.findById(updateProductImageDto.getId()).orElseThrow(()->new RuntimeException(PRODUCT_IMAGE_NOT_FOUND+updateProductImageDto.getId()));
         productImageMapper.updateProductImageFromUpdatedProductImage(updateProductImageDto,productImage);
+        productImage.setProduct(product);
         return productImageRepository.save(productImage);
     }
 
@@ -72,7 +75,7 @@ public class ProductImageServiceImpl implements ProductImageService {
     public void delete(DeleteProductImageDto deleteProductImageDto) {
         ProductImage productImage=productImageRepository
                 .findById(deleteProductImageDto.getId())
-                .orElseThrow(()->new RuntimeException(PRODUCT_IMAGE_NOT_FOUND+deleteProductImageDto.getId()));
+                .orElseThrow(()->new BusinessException(PRODUCT_IMAGE_NOT_FOUND+deleteProductImageDto.getId()));
         productImageRepository.delete(productImage);
     }
 }

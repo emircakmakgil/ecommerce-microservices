@@ -1,5 +1,6 @@
 package io.github.emircakmakgil.productservice.service.impl;
 
+import io.github.emircakmakgil.productservice.core.exception.type.BusinessException;
 import io.github.emircakmakgil.productservice.dto.BrandDto.BrandListiningDto;
 import io.github.emircakmakgil.productservice.dto.BrandDto.CreateBrandDto;
 import io.github.emircakmakgil.productservice.dto.BrandDto.DeleteBrandDto;
@@ -29,7 +30,6 @@ public class BrandServiceImpl implements BrandService {
     }
 
     //TODO: Add logging
-    //TODO: ADD EXCEPTION HANDLING
     @Override
     public List<Brand> findAll(List<UUID> brand) {
         List<Brand> brands = brandRepository.findAllById(brand);
@@ -38,7 +38,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Brand findById(UUID id) {
-        Brand brand=brandRepository.findById(id).orElseThrow(()->new RuntimeException(BRAND_NOT_FOUND+id));
+        Brand brand=brandRepository.findById(id).orElseThrow(()->new BusinessException(BRAND_NOT_FOUND+id));
         return brand;
     }
 
@@ -62,14 +62,14 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Brand update(UpdateBrandDto updateBrandDto) {
-            Brand updatedBrand=brandRepository.findById(updateBrandDto.getId()).orElseThrow(()->new RuntimeException(BRAND_NOT_FOUND+updateBrandDto.getId()));
+            Brand updatedBrand=brandRepository.findById(updateBrandDto.getId()).orElseThrow(()->new BusinessException(BRAND_NOT_FOUND+updateBrandDto.getId()));
             brandMapper.updateBrandFromUpdateBrandDto(updateBrandDto,updatedBrand);
             return brandRepository.save(updatedBrand);
     }
 
     @Override
     public void delete(DeleteBrandDto deleteBrandDto) {
-        Brand brand=brandRepository.findById(deleteBrandDto.getId()).orElseThrow(()->new RuntimeException(BRAND_NOT_FOUND+deleteBrandDto.getId()));
+        Brand brand=brandRepository.findById(deleteBrandDto.getId()).orElseThrow(()->new BusinessException(BRAND_NOT_FOUND+deleteBrandDto.getId()));
         brandRepository.delete(brand);
     }
 }

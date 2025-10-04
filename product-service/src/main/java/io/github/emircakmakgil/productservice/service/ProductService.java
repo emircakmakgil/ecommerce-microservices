@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public interface ProductService {
     List<Product> findAll(List<UUID> product);
-    Optional<Product> findById(UUID id);
+    Product findById(UUID id);
     void add(CreateProductDto createProductDto);
     List<ProductListiningDto> getAll();
     Product update(UpdateProductDto updateProductDto);

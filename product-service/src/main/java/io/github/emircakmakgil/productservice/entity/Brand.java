@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import io.github.emircakmakgil.productservice.model.enums.Status;
 import org.hibernate.annotations.UuidGenerator;
+import org.hibernate.validator.constraints.URL;
 
 import java.net.ProtocolFamily;
 import java.time.LocalDateTime;
@@ -29,9 +30,11 @@ public class Brand {
     private String description;
     
     @Column(name = "logo_url")
+    @URL(message = "Invalid URL format")
     private String logoUrl;
     
     @Column(name = "website_url")
+    @URL(message = "Invalid URL format")
     private String websiteUrl;
     
     @Column(name = "country_of_origin")

@@ -6,7 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -35,10 +35,10 @@ public class Category {
     private Category parentCategory;
     
     @OneToMany(mappedBy = "parentCategory", fetch = FetchType.LAZY)
-    private List<Category> subCategories;
+    private Set<Category> subCategories;
     
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-    private List<Product> products;
+    private Set<Product> products;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;

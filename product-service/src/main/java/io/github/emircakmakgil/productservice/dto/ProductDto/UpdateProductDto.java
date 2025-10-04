@@ -16,6 +16,8 @@ public class UpdateProductDto {
     private Integer stockQuantity;
     private Double weight;
     private ProductType productType;
+    private UUID brandId;
+    private UUID categoryId;
 
 
     public UpdateProductDto( String name, String description, BigDecimal price, Integer stockQuantity,
@@ -28,4 +30,7 @@ public class UpdateProductDto {
         this.productType = productType;
     }
 
+    public UpdateProductDto() {
+
+    }
 }
