@@ -1,5 +1,6 @@
 package io.github.emircakmakgil.productservice.service.impl;
 
+import io.github.emircakmakgil.productservice.core.exception.type.BusinessException;
 import io.github.emircakmakgil.productservice.dto.CategoryDto.CategoryListiningDto;
 import io.github.emircakmakgil.productservice.dto.CategoryDto.CreateCategoryDto;
 import io.github.emircakmakgil.productservice.dto.CategoryDto.DeleteCategoryDto;
@@ -36,7 +37,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category findById(UUID id) {
-        Category category=categoryRepository.findById(id).orElseThrow(()->new RuntimeException(CATEGORY_NOT_FOUND+id));
+        Category category=categoryRepository.findById(id).orElseThrow(()->new BusinessException(CATEGORY_NOT_FOUND+id));
         //TODO: Add logging
         return category;
     }
@@ -60,14 +61,14 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category update(UpdateCategoryDto updateCategoryDto) {
-        Category category=categoryRepository.findById(updateCategoryDto.getId()).orElseThrow(()->new RuntimeException(CATEGORY_NOT_FOUND+updateCategoryDto.getId()));
+        Category category=categoryRepository.findById(updateCategoryDto.getId()).orElseThrow(()->new BusinessException(CATEGORY_NOT_FOUND+updateCategoryDto.getId()));
         categoryMapper.updateCategoryFromUpdateCategoryDto(updateCategoryDto,category);
         return categoryRepository.save(category);
     }
 
     @Override
     public void delete(DeleteCategoryDto deleteCategoryDto) {
-        Category category=categoryRepository.findById(deleteCategoryDto.getId()).orElseThrow(()->new RuntimeException(CATEGORY_NOT_FOUND+deleteCategoryDto.getId()));
+        Category category=categoryRepository.findById(deleteCategoryDto.getId()).orElseThrow(()->new BusinessException(CATEGORY_NOT_FOUND+deleteCategoryDto.getId()));
         categoryRepository.delete(category);
 
     }

@@ -1,17 +1,21 @@
 package io.github.emircakmakgil.productservice.service.impl;
 
+import io.github.emircakmakgil.productservice.core.exception.type.BusinessException;
 import io.github.emircakmakgil.productservice.dto.ProductDto.CreateProductDto;
 import io.github.emircakmakgil.productservice.dto.ProductDto.DeleteProductDto;
 import io.github.emircakmakgil.productservice.dto.ProductDto.ProductListiningDto;
 import io.github.emircakmakgil.productservice.dto.ProductDto.UpdateProductDto;
+import io.github.emircakmakgil.productservice.entity.Brand;
+import io.github.emircakmakgil.productservice.entity.Category;
 import io.github.emircakmakgil.productservice.entity.Product;
 import io.github.emircakmakgil.productservice.mapper.ProductMapper;
 import io.github.emircakmakgil.productservice.repository.ProductRepository;
+import io.github.emircakmakgil.productservice.service.BrandService;
+import io.github.emircakmakgil.productservice.service.CategoryService;
 import io.github.emircakmakgil.productservice.service.ProductService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -21,10 +25,14 @@ import static io.github.emircakmakgil.productservice.constant.GeneralConstant.PR
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+    private final BrandService brandService;
+    private final CategoryService categoryService;
 
-    public ProductServiceImpl(ProductRepository productRepository, ProductMapper productMapper) {
+    public ProductServiceImpl(ProductRepository productRepository, ProductMapper productMapper, BrandService brandService, CategoryService categoryService) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
+        this.brandService = brandService;
+        this.categoryService = categoryService;
     }
 
     @Override
@@ -34,13 +42,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> findById(UUID id) {
-        return productRepository.findById(id);
+    public Product findById(UUID id) {
+        return productRepository.findById(id).orElseThrow(()->new BusinessException(PRODUCT_NOT_FOUND+id));
     }
 
     @Override
     public void add(CreateProductDto createProductDto) {
+        Brand brand=brandService.findById(createProductDto.getBrandId());
+        Category category=categoryService.findById(createProductDto.getCategoryId());
         Product product=productMapper.createProductFromCreateProductDto(createProductDto);
+        product.setBrand(brand);
+        product.setCategory(category);
         productRepository.save(product);
     }
 
@@ -56,14 +68,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product update(UpdateProductDto updateProductDto) {
-        Product product=productRepository.findById(updateProductDto.getId()).orElseThrow(()->new RuntimeException(PRODUCT_NOT_FOUND+updateProductDto.getId()));
+        Brand brand=brandService.findById(updateProductDto.getBrandId());
+        Category category=categoryService.findById(updateProductDto.getCategoryId());
+
+        Product product=productRepository.findById(updateProductDto.getId()).orElseThrow(()->new BusinessException(PRODUCT_NOT_FOUND+updateProductDto.getId()));
+        product.setBrand(brand);
+        product.setCategory(category);
         productMapper.updateProductFromUpdatedProductDto(updateProductDto,product);
         return productRepository.save(product);
     }
 
     @Override
     public void delete(DeleteProductDto deleteProductDto) {
-        Product product = productRepository.findById(deleteProductDto.getId()).orElseThrow(() -> new RuntimeException(PRODUCT_NOT_FOUND + deleteProductDto.getId()));
+        Product product = productRepository.findById(deleteProductDto.getId()).orElseThrow(() -> new BusinessException(PRODUCT_NOT_FOUND + deleteProductDto.getId()));
         productRepository.delete(product);
 
     }

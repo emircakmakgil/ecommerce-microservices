@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -36,6 +37,8 @@ public class CreateProductDto {
 
 
     private Status status;
+    private UUID categoryId;
+    private UUID brandId;
 
 
     @NotNull(message = "Product type is required")
