@@ -9,6 +9,7 @@ import io.github.emircakmakgil.productservice.entity.Brand;
 import io.github.emircakmakgil.productservice.entity.Category;
 import io.github.emircakmakgil.productservice.entity.Product;
 import io.github.emircakmakgil.productservice.mapper.ProductMapper;
+import io.github.emircakmakgil.productservice.model.enums.Status;
 import io.github.emircakmakgil.productservice.repository.ProductRepository;
 import io.github.emircakmakgil.productservice.service.BrandService;
 import io.github.emircakmakgil.productservice.service.CategoryService;
@@ -82,6 +83,28 @@ public class ProductServiceImpl implements ProductService {
     public void delete(DeleteProductDto deleteProductDto) {
         Product product = productRepository.findById(deleteProductDto.getId()).orElseThrow(() -> new BusinessException(PRODUCT_NOT_FOUND + deleteProductDto.getId()));
         productRepository.delete(product);
-
     }
+
+    @Override
+    public List<ProductListiningDto> getActiveProducts() {
+        List<Product> products=productRepository.findAll();
+        List<ProductListiningDto> productListiningDtos=products
+                .stream()
+                .filter(product -> Status.ACTIVE.equals(product.getStatus().toString()))
+                .map(productMapper::toProductListiningDto)
+                .collect(Collectors.toList());
+        return productListiningDtos;
+    }
+
+    @Override
+    public List<ProductListiningDto> getInActiveProducts() {
+        List<Product> products=productRepository.findAll();
+        List<ProductListiningDto> productListiningDtos=products
+                .stream()
+                .filter(product -> Status.INACTIVE.equals(product.getStatus().toString()))
+                .map(productMapper::toProductListiningDto)
+                .collect(Collectors.toList());
+        return productListiningDtos;
+    }
+
 }

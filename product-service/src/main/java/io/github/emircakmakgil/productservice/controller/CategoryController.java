@@ -40,5 +40,10 @@ public class CategoryController {
     public void deleteCategory(@RequestBody DeleteCategoryDto deleteCategoryDto){
         this.categoryService.delete(deleteCategoryDto);
     }
+    @GetMapping("/name")
+    @ResponseStatus(code= HttpStatus.OK)
+    public CategoryListiningDto getCategoryByName(@RequestParam String name){
+        return categoryService.findByName(name);
+    }
     
 }

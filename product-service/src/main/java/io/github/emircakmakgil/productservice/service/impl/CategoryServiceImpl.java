@@ -72,4 +72,13 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.delete(category);
 
     }
+
+  @Override
+  public CategoryListiningDto findByName(String name) {
+      Category category = categoryRepository.findByName(name);
+        if (category == null) {
+            throw new BusinessException(CATEGORY_NOT_FOUND + name);
+        }
+      return categoryMapper.toCategoryListiningDto(category);
+  }
 }

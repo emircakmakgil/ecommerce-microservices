@@ -40,4 +40,15 @@ public class ProductController {
     public void deleteProduct(@RequestBody DeleteProductDto deleteProductDto){
         this.productService.delete(deleteProductDto);
     }
+    @GetMapping("/ACTIVE")
+    @ResponseStatus(code= HttpStatus.OK)
+    public List<ProductListiningDto> getActiveProducts(){
+        return this.productService.getActiveProducts();
+    }
+    @GetMapping("INACTIVE")
+    @ResponseStatus(code= HttpStatus.OK)
+    public List<ProductListiningDto> getInActiveProducts(){
+        return this.productService.getInActiveProducts();
+    }
+
 }
