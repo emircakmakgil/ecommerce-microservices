@@ -25,7 +25,7 @@ public class CategoryController {
         return this.categoryService.getAll();
     }
 
-    @PostMapping
+    @PostMapping(consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(code= HttpStatus.CREATED)
     public void createCategory(@RequestBody CreateCategoryDto createCategoryDto){
         this.categoryService.add(createCategoryDto);
