@@ -17,5 +17,8 @@ public interface ProductService {
     List<ProductListiningDto> getAll();
     Product update(UpdateProductDto updateProductDto);
     void delete(DeleteProductDto deleteProductDto);
+    List<ProductListiningDto> getActiveProducts();
+    List<ProductListiningDto> getInActiveProducts();
+
 
 }

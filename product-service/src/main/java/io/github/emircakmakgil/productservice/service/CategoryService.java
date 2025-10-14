@@ -18,4 +18,6 @@ public interface CategoryService {
     List<CategoryListiningDto> getAll();
     Category update(UpdateCategoryDto updateCategoryDto);
     void delete(DeleteCategoryDto deleteCategoryDto);
+    CategoryListiningDto findByName(String name);
+
 }
