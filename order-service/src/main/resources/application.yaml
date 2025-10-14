@@ -1,6 +1,14 @@
 spring:
   application:
-    name: "order-service"
+    name: order_service
+  datasource:
+    url: "jdbc:postgresql://localhost:5434/postgres"
+    username: user
+    password: test
+  jpa:
+    showSql: true
+    hibernate:
+      ddlAuto: update
 
 server:
     port: 8082
