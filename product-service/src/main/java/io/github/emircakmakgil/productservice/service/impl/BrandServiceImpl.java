@@ -32,8 +32,7 @@ public class BrandServiceImpl implements BrandService {
     //TODO: Add logging
     @Override
     public List<Brand> findAll(List<UUID> brand) {
-        List<Brand> brands = brandRepository.findAllById(brand);
-        return brands;
+        return brandRepository.findAllById(brand);
     }
 
     @Override
