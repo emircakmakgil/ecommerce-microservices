@@ -41,9 +41,7 @@ public class BrandMapper {
                 brand.getWebsiteUrl(),
                 brand.getCountryOfOrigin(),
                 brand.getFoundedYear(),
-                brand.getStatus(),
-                brand.getCreatedAt(),
-                brand.getUpdatedAt());
+                brand.getStatus());
     }
 
 }
