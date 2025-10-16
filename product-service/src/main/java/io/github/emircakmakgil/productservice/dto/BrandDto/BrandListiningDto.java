@@ -3,6 +3,7 @@ package io.github.emircakmakgil.productservice.dto.BrandDto;
 import io.github.emircakmakgil.productservice.model.enums.Status;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.URL;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -23,8 +24,7 @@ public class BrandListiningDto {
     public BrandListiningDto() {}
 
     public BrandListiningDto(String name, String description, String logoUrl, String websiteUrl,
-                             String countryOfOrigin, Integer foundedYear, Status status, LocalDateTime createdAt,
-                             LocalDateTime updatedAt) {
+                             String countryOfOrigin, Integer foundedYear, Status status) {
         this.name = name;
         this.description = description;
         this.logoUrl = logoUrl;
@@ -32,8 +32,6 @@ public class BrandListiningDto {
         this.countryOfOrigin = countryOfOrigin;
         this.foundedYear = foundedYear;
         this.status = status;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
 
 }

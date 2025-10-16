@@ -1,6 +1,7 @@
 package io.github.emircakmakgil.orderservice.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
@@ -12,6 +13,7 @@ import java.util.UUID;
 @Table(name = "order_items")
 @Getter
 @Setter
+@Builder
 public class Item {
 
     @Id

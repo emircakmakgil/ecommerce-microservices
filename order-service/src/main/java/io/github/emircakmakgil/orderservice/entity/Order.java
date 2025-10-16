@@ -3,6 +3,7 @@ package io.github.emircakmakgil.orderservice.entity;
 import io.github.emircakmakgil.orderservice.model.enums.OrderStatus;
 import io.github.emircakmakgil.orderservice.model.enums.PaymentMethod;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @Table(name = "orders")
 @Getter
 @Setter
+@Builder
 public class Order {
     @Id
     @UuidGenerator
