@@ -2,6 +2,7 @@ package io.github.emircakmakgil.orderservice.mapper;
 
 import io.github.emircakmakgil.orderservice.dto.ItemDto.CreateItemDto;
 import io.github.emircakmakgil.orderservice.dto.ItemDto.ItemListiningDto;
+import io.github.emircakmakgil.orderservice.dto.ItemDto.UpdateItemDto;
 import io.github.emircakmakgil.orderservice.entity.Item;
 import lombok.Data;
 import org.springframework.stereotype.Component;
@@ -17,11 +18,11 @@ public class ItemMapper {
                 .unitPrice(createItemDto.getUnitPrice())
                 .build();
     }
-    public void updateItemFromCreateItemDto(CreateItemDto createItemDto, Item item) {
-        item.setProductId(createItemDto.getProductId());
-        item.setQuantity(createItemDto.getQuantity());
-        item.setProductName(createItemDto.getProductName());
-        item.setUnitPrice(createItemDto.getUnitPrice());
+    public void updateItemFromCreateItemDto(UpdateItemDto updateItemDto, Item item) {
+        item.setProductId(updateItemDto.getProductId());
+        item.setQuantity(updateItemDto.getQuantity());
+        item.setProductName(updateItemDto.getProductName());
+        item.setUnitPrice(updateItemDto.getUnitPrice());
     }
     public ItemListiningDto toItemListiningDto(Item item){
         return new ItemListiningDto(
